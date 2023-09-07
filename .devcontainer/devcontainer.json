@@ -1,4 +1,5 @@
 {
+  "name": "Lua in Go: HTTP request from WASM",
   "image": "ubuntu:jammy",
   "features": {
     "ghcr.io/devcontainers/features/go:1": {},
