@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP request for GopherLua</title>
+    <script type="text/javascript" src="wasm_exec.js"></script>
+</head>
+<body>
+<h2>HTTP Request from inside WASM implemented in GopherLua</h2>
+
+<p>This example uses <a href="https://github.com/cjoudrey/gluahttp">cjoudrey/gluahttp</a> library for <a href="https://github.com/yuin/gopher-lua">GopherLua</a>.</p>
+<p>See the output in browser developer console.</p>
+
+<p>Actual code:</p>
+<pre>
+
+local http = require("http")
+local res, err = http.request('GET', 'https://httpbin.org/anything', {
+  headers={
+    ['User-Agent']='gluahttp/wasm'
+  }
+})
+print(res.body)
+
+</pre>
+<script type="text/javascript">
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+        go.run(result.instance);
+    });
+</script>
+<section>
+    <h4>Info</h4>
+    <ul>
+        <li><a href="https://github.com/wasm-outbound-http-examples/lua-in-go/tree/main/browser-gluahttp">Demo source code</a></li>
+        <li>Versions used on the moment of build:<small>
+            Go: 1.21.1,
+            GopherLua: <a href="https://github.com/yuin/gopher-lua/releases/tag/v1.1.0">1.1.0</a>,
+            gluahttp: <a href="https://github.com/cjoudrey/gluahttp/commit/25003d9adfa90bf4c4609bcebdf2061a5636d532">v0.0.0-20201111170219-25003d9adfa9</a>
+        </small></li>
+    </ul>
+</section>
+<footer><small>Created for (wannabe-awesome) <a href="https://github.com/vasilev/HTTP-request-from-inside-WASM">list</a></small></footer>
+</body>
+</html>
