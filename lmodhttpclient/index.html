@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP request for ofunc/lua</title>
+    <script type="text/javascript" src="wasm_exec.js"></script>
+</head>
+<body>
+<h2>HTTP Request from inside WASM implemented in ofunc/lua</h2>
+
+<p>This example uses <a href="https://github.com/erdian718/lmodhttpclient">erdian718/lmodhttpclient</a> (aka ofunc/lmodhttpclient) library for <a href="https://github.com/erdian718/lua">erdian718/lua</a> (aka ofunc/lua).</p>
+<p>See the output in browser developer console.</p>
+
+<p>Actual code:</p>
+<pre>
+
+local io = require 'io'
+local httpclient = require 'http/client'
+
+local res = httpclient.get('https://httpbin.org/anything')
+io.copy(res, io.stdout)
+res:close()
+
+</pre>
+<script type="text/javascript">
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+        go.run(result.instance);
+    });
+</script>
+<section>
+    <h4>Info</h4>
+    <ul>
+        <li><a href="https://github.com/wasm-outbound-http-examples/lua-in-go/tree/main/browser-lmodhttpclient">Demo source code</a></li>
+        <li>Versions used on the moment of build:<small>
+            Go: 1.21.1,
+            ofunc/lua: <a href="https://github.com/erdian718/lua/commit/9e3ab11bf7ebebdde28d993e12f764811d57e804">v1.1.0-9e3ab11bf7eb</a>,
+            lmodhttpclient: <a href="https://github.com/erdian718/lmodhttpclient/commit/d87d685c200b19b4e1c3753146d064288dbe112b">v0.0.0-d87d685c200b</a>,
+            golang.org/x/net: v0.15.0
+        </small></li>
+    </ul>
+</section>
+<footer><small>Created for (wannabe-awesome) <a href="https://github.com/vasilev/HTTP-request-from-inside-WASM">list</a></small></footer>
+</body>
+</html>
