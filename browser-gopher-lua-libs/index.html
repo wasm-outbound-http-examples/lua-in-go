@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP request for GopherLua using vadv/gopher-lua-libs</title>
+    <script type="text/javascript" src="wasm_exec.js"></script>
+</head>
+<body>
+<h2>HTTP Request from inside WASM implemented in GopherLua using vadv/gopher-lua-libs</h2>
+
+<p>This example uses <a href="https://github.com/vadv/gopher-lua-libs">vadv/gopher-lua-libs</a> library for <a href="https://github.com/yuin/gopher-lua">GopherLua</a>.</p>
+<p>See the output in browser developer console.</p>
+
+<p>Actual code:</p>
+<pre>
+
+local http = require('http')
+local client = http.client()
+local req = http.request('GET', 'https://httpbin.org/anything')
+local res, err = client:do_request(req)
+if err then error(err) end
+print(res.body)
+
+</pre>
+<script type="text/javascript">
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+        go.run(result.instance);
+    });
+</script>
+<footer><small>Created for (wannabe-awesome) <a href="https://github.com/vasilev/HTTP-request-from-inside-WASM">list</a></small></footer>
+</body>
+</html>

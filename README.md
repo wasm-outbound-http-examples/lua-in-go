@@ -16,4 +16,8 @@ Also [browser demo](https://wasm-outbound-http-examples.github.io/lua-in-go/glua
 For details, see its [README](browser-lmodhttpclient/README.md).
 Also [browser demo](https://wasm-outbound-http-examples.github.io/lua-in-go/lmodhttpclient/) is available.
 
+3. Example in `browser-gopher-lua-libs` directory allows you to build a `gopher-lua-libs` sample yourself and experiment with it.
+For details, see its [README](browser-gopher-lua-libs/README.md).
+Also [browser demo](https://wasm-outbound-http-examples.github.io/lua-in-go/gopher-lua-libs/) is available.
+
 <sub>Created for (wannabe-awesome) [list](https://github.com/vasilev/HTTP-request-from-inside-WASM)</sub>
